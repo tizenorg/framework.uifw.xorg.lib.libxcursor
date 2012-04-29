@@ -1,10 +1,10 @@
-Name:       libXcursor
+Name:       libxcursor
 Summary:    X cursor management library
 Version:    1.1.11
-Release:    1
+Release:    2.7
 Group:      System/Libraries
 License:    MIT
-Source0:    libXcursor-%{version}.tar.gz
+Source0:    libxcursor-%{version}.tar.gz
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(x11)
@@ -42,15 +42,16 @@ See the libxcursor1 package for further information.
 
 
 %build
-chmod +x autogen.sh
-libtoolize -f -c
+export LDFLAGS+="-lXrender -lXfixes"
+export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
+#chmod +x autogen.sh
+#libtoolize -f -c
 ./autogen.sh
-%configure --disable-static
+%configure 
 
 make %{?jobs:-j%jobs}
 
 %install
-rm -rf %{buildroot}
 %make_install
 rm -rf %{buildroot}/usr/share/man
 
