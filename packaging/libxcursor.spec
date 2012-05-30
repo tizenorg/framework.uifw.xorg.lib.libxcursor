@@ -5,6 +5,7 @@ Release:    2.7
 Group:      System/Libraries
 License:    MIT
 Source0:    libxcursor-%{version}.tar.gz
+Source1001: packaging/libxcursor.manifest 
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(x11)
@@ -42,6 +43,7 @@ See the libxcursor1 package for further information.
 
 
 %build
+cp %{SOURCE1001} .
 export LDFLAGS+="-lXrender -lXfixes"
 export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 #chmod +x autogen.sh
@@ -61,10 +63,12 @@ rm -rf %{buildroot}/usr/share/man
 
 
 %files
+%manifest libxcursor.manifest
 /usr/lib/*.so.*
 
 
 %files devel
+%manifest libxcursor.manifest
 /usr/include/*
 /usr/lib/*.so
 /usr/lib/pkgconfig/xcursor.pc
