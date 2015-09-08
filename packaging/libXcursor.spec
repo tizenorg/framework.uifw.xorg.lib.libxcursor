@@ -25,7 +25,7 @@ several sizes and the library automatically picks the best size.
 %package devel
 Summary: Development files for %{name}
 Group: Development/Libraries
-Provides: libxcursor-devel 
+Provides: libxcursor-devel
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -48,7 +48,8 @@ make %{?jobs:-j%jobs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
+mkdir -p %{buildroot}/usr/share/license
+cp -af COPYING %{buildroot}/usr/share/license/%{name}
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/default
@@ -66,7 +67,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc AUTHORS COPYING README ChangeLog
+/usr/share/license/%{name}
+#%doc AUTHORS COPYING README ChangeLog
 %{_libdir}/libXcursor.so.1
 %{_libdir}/libXcursor.so.1.0.2
 %dir %{_datadir}/icons/default
