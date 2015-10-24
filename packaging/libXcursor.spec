@@ -1,6 +1,6 @@
 Summary: Cursor management library
 Name: libXcursor
-Version: 1.1.13
+Version: 1.1.14
 Release: 1
 License: MIT
 Group: System Environment/Libraries
